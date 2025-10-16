@@ -1,54 +1,37 @@
+<!DOCTYPE html>
 <head>
-    <title>Joe's Hot Dog Stand</title>
-
+    <style>
+        .container {
+            display: grid;
+            grid-template: 80px / auto auto auto;
+            padding: 10px;
+            margin: auto;
+            max-width: 600px;
+            justify-content: center;
+            align-content:center;
+            gap: 10px;
+        }
+        .container div {
+            background-color: white;
+            border: 2px solid black;
+            aspect-ratio: 1;
+            padding: 10px;
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
 </head>
-
 <body>
-    <script>
-        function main () {
-            var numDogs;
-            var numFries;
-            var numSoda;
-            var total;
-            var discount;
-            var tax;
-    
-            while (!(parseFloat(numDogs))) {
-                numDogs = prompt("How many hot dogs would you like?");
-                numDogs = parseFloat(numDogs);
-            }
-            while (!(parseFloat(numFries))) {
-                numFries = prompt("How many orders of fries would you like?");
-                numDogs = parseFloat(numDogs);
-            }
-            while (!(parseFloat(numSoda))) {
-                numSoda = prompt("How many sodas would you like?");
-                numDogs = parseFloat(numDogs);
-            }
-    
-            
-            total = (numDogs * 4.99) + (numFries * 3.99) + (numSoda * 1.79);
-            document.write("Subtotal before discount: " + showMoney(total) + "<br>");
-            if (total >= 30) {
-                discount = .10 * total;
-                total = total - discount; 
-                document.write("Discount applied: " + showMoney(discount) + "<br>");
-                document.write("Total after discount: " + showMoney(total) + "<br>");
-            }
-            
-            tax = .0625 * total;
-            total = total + tax;
-            document.write("Tax applied: " + showMoney(tax) + "<br>");
-            document.write("Total after tax: " + showMoney(total) + "<br>");
-        }
-    
-        function showMoney(amount) {
-            var temp = amount * 100;
-            temp = Math.round(temp);
-            temp = temp / 100;
-    
-            return temp.toString();
-        }
-        main();
-    </script>
+    <div class="container">
+        <div>X</div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div>X</div>
+        <div></div>
+        <div>O</div>
+        <div></div>
+    </div>
+
 </body>
