@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container {
+            display: grid;
+            grid-template: 80px / auto auto auto;
+            padding: 10px;
+            margin: auto;
+            max-width: 600px;
+            justify-content: center;
+            align-content:center;
+            gap: 10px;
+        }
+        .square {
+            background-color: white;
+            border: 2px solid black;
+            aspect-ratio: 1;
+            padding: 10px;
+            font-size: 40px;
+            text-align: center;
+            text-justify: center;
+        }
+        .square:hover {
+            background-color: grey;
+        }
+        header h1 {
+            text-align: center;
+        }
+        .turn {
+            border: 2px solid blue;
+            padding: 10px;
+            display: inline-block;
+        }
+        .win {
+            border: 2px solid red;
+            padding:10px;
+            display: inline-block;
+        }
+        .header-container {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>tic tac toe!</h1>
+        <div class="turn">
+            Turn: 
+        </div>
+        
+        
+        <div class="container">
+            <script>
+                const NUM_SQUARES = 9;
+                for (i=0; i<NUM_SQUARES; i++)
+                {
+                    id = "sq"+i;
+                    document.write( "<div class='square' id='" + id + "'></div>" );
+                }
+            </script>
+        </div>
+
+        <div class="win">
+            Win Con: 
+        </div>
+    </div>
+
+</body>
