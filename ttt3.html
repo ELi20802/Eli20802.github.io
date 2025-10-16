@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container {
+            display: grid;
+            grid-template: 80px / auto auto auto;
+            padding: 10px;
+            margin: auto;
+            max-width: 600px;
+            justify-content: center;
+            align-content:center;
+            gap: 10px;
+        }
+        .square {
+            background-color: white;
+            border: 2px solid black;
+            aspect-ratio: 1;
+            padding: 10px;
+            font-size: 40px;
+            text-align: center;
+            text-justify: center;
+        }
+        .square:hover {
+            background-color: grey;
+        }
+        header h1 {
+            text-align: center;
+        }
+        .turn {
+            border: 2px solid blue;
+            padding: 10px;
+            display: inline-block;
+        }
+        .win {
+            border: 2px solid red;
+            padding:10px;
+            display: inline-block;
+        }
+        .header-container {
+            text-align: center;
+        }
+        .button {
+            padding:10px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        var x = Math.floor(Math.random() * 10);
+        var player;
+        var started = false;
+
+        function onClick(square) {
+            if (started) {
+                var square = event.target;
+                if (square.innerText == "") {
+                    square.innerText = player;
+                }
+                if (player == "X") {
+                    player = "O";
+                }
+                else if (player == "O") {
+                    player = "X";
+                }
+                alert(event.target.id);
+            }
+
+        }
+
+        function start() {
+            if (x < 5) {
+                player = "X";
+            }
+            else {
+                player = "O";
+            }
+
+            for (i = 0; i < 9; i++) {
+                square = document.getElementById("sq" + i);
+                square.innerText = "";
+            }
+            started=true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>tic tac toe!</h1>
+        <div class="turn">
+            Turn: 
+        </div>
+        
+        
+        <div class="container">
+            <script>
+                const NUM_SQUARES = 9;
+                for (i=0; i<NUM_SQUARES; i++)
+                {
+                    var id = "sq"+i;
+                    document.write( "<div class='square' id='" + id + "'></div>" );
+                }
+
+                for (i = 0; i < NUM_SQUARES; i++) {
+                    square = document.getElementById("sq" + i);
+                    square.addEventListener("click", onClick);
+                }
+            </script>
+
+        </div>
+
+        <div class="win">
+            Win Con: 
+        </div>
+        
+        <br><br> <button class="button" onclick="start()">Start Game</button>
+    </div>
+
+</body>
