@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container {
+            display: grid;
+            grid-template: 80px / auto auto auto;
+            padding: 10px;
+            margin: auto;
+            max-width: 600px;
+            justify-content: center;
+            align-content:center;
+            gap: 10px;
+        }
+        .square {
+            background-color: white;
+            border: 2px solid black;
+            aspect-ratio: 1;
+            padding: 10px;
+            font-size: 40px;
+            text-align: center;
+            text-justify: center;
+        }
+        .square:hover {
+            background-color: grey;
+        }
+        header h1 {
+            text-align: center;
+        }
+        .turn {
+            border: 2px solid blue;
+            padding: 10px;
+            display: inline-block;
+        }
+        .status {
+            border: 2px solid red;
+            padding:10px;
+            display: inline-block;
+        }
+        .header-container {
+            text-align: center;
+        }
+        .button {
+            padding:10px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        var player;
+        var status;
+        var started = false;
+
+        function onClick(square) {
+            if (started) {
+                var square = event.target;
+                if (square.innerText == "") {
+                    square.innerText = player;
+                    moves = [];
+                    squares.forEach(addToMoves);
+                    findMoves(moves);
+
+                    if (player == "X") {
+                        player = "O";
+                    }
+                    else if (player == "O") {
+                        player = "X";
+                    }
+                    writeTurn();
+                }  
+                alert(event.target.id);
+            }
+        }
+
+        function addToMoves(square) {
+            if (square.innerText == "X" || square.innerText == "O") {
+                moves.push(square.innerText);
+            }
+            else {
+                moves.push("-");
+            }
+        }
+
+        function findMoves(moves) {
+            var hasWin = false;
+            var hasStalemate = true;     
+            var winCons = [];
+
+            winCons.push(moves[0] + moves[1] + moves[2]);
+            winCons.push(moves[3] + moves[4] + moves[5]);
+            winCons.push(moves[6] + moves[7] + moves[8]);
+            winCons.push(moves[0] + moves[3] + moves[6]);
+            winCons.push(moves[1] + moves[4] + moves[7]);
+            winCons.push(moves[2] + moves[5] + moves[8]);
+            winCons.push(moves[0] + moves[4] + moves[8]);
+            winCons.push(moves[2] + moves[4] + moves[6]);
+
+            for (var i = 0; i < 9; i++) {
+                if (winCons[i] == "XXX" || winCons[i] == "OOO") {
+                    hasWin = true;
+                    break;
+                }
+            }
+         
+            for (var i = 0; i < 9; i++) {
+                if (moves[i] == "-") {
+                    hasStalemate = false;
+                    break;
+                }
+            }
+
+            if (hasWin) {
+                started = false;
+                status = player + " WON";
+                writeStatus();
+            }
+            if (hasStalemate) {
+                started = false;
+                status = "STALEMATE";
+                writeStatus();
+            }
+        }
+
+        function writeStatus() {   
+            document.querySelector(".status").innerText = status;
+        }
+
+        function writeTurn() {
+            document.querySelector(".turn").innerText = player;
+        }
+
+        function start() {
+            var x = Math.floor(Math.random() * 10);
+            status = "";
+            writeStatus();
+            alert(x);
+
+            if (x < 5) {
+                player = "X";
+            }
+            else {
+                player = "O";
+            }
+            writeTurn();
+
+            for (i = 0; i < 9; i++) {
+                square = document.getElementById("sq" + i);
+                square.innerText = "";
+            }
+            started=true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>tic tac toe!</h1>
+        <p>Turn:</p>
+        <div class="turn">
+        </div>
+        
+        <div class="container">
+            <script>
+                const NUM_SQUARES = 9;
+                var squares = [];
+                for (i=0; i<NUM_SQUARES; i++)
+                {
+                    var id = "sq"+i;
+                    document.write( "<div class='square' id='" + id + "'></div>" );
+                }
+
+                for (i = 0; i < NUM_SQUARES; i++) {
+                    square = document.getElementById("sq" + i);
+                    squares.push(square);
+
+                    square.addEventListener("click", onClick);
+
+                }
+            </script>
+
+        </div>
+        <br><p>Status:</p>
+        <div class="status">
+        </div>
+        
+        <br><br> <button class="button" onclick="start()">Start Game</button>
+    </div>
+
+</body>
