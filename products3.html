@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+        font-family: 'Times New Roman', Times, serif;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <div id = "result"> </div>
+
+    <button onclick="onClick()">Filter</button>
+    <select id="selector">
+        <option value="">Categories</option>
+    </select>
+
+    <script>
+        var allProducts = [];
+
+        $.get("products.json", function(data) {
+            allProducts = data.products;
+            var categories = new Set();
+
+            data.products.forEach(product => {
+                product.categories.forEach(cat => categories.add(cat));
+            });
+
+            const select = $("#selector");
+            categories.forEach(cat => {
+                select.append(`<option value="${cat}">${cat}</option>`);
+            });
+
+        });
+
+        function onClick() {
+            const category = $("#selector").val();
+            var str = "";
+
+            if (category) {
+                allProducts.forEach(product => {
+                    if (product.categories.includes(category)) {
+                        str += `${product.name}<br>`;
+                    }
+                });
+            }
+            document.getElementById("result").innerHTML = str;
+        }
+            
+    </script>
+
+</body>
+</html>
