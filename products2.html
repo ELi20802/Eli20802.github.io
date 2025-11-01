@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+      <script src="jquery-3.7.1.min.js"></script>
+        <style>
+          * {
+            font-family: 'Times New Roman', Times, serif;
+          }
+
+        </style>
+    </head>
+
+    <body>
+      <h1>Products</h1>
+      <div id = "result"></div>
+
+      <button onclick="onClick()">Load Products</button>
+
+      <script>
+          function onClick() {
+            $.get("products.json", function(data) {
+
+              var str = "";
+              data.products.forEach(product => {
+              str += 
+                `<h2>${product.name}</h2>
+                  ${product.description}<br>
+                  Price: ${product.price} <br>
+                  Categories: ${product.categories.join(", ")} <br><br>`;
+            });
+
+            document.getElementById("result").innerHTML = str;
+          });
+        }
+
+    </script>
+  </body>
+</html>
