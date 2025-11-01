@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                font-family: 'Times New Roman', Times, serif;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>My chess.com stats</h1>
+        <div id="stats"></div>
+        
+        <script>
+            fetch("https://api.chess.com/pub/player/flourc/stats")
+                .then(response => response.json())
+                .then(data => {
+                    var str = "";
+
+                    const categories = ["chess_daily", "chess_rapid", "chess_bullet", "chess_blitz"];
+
+                    categories.forEach(cat => {
+                        str += `${cat}:<br>
+                        Last Rating: ${data[cat].last.rating}<br>
+                        Best Rating: ${data[cat].best.rating}<br><br>`;
+                    });
+                    document.getElementById("stats").innerHTML = str;
+                });
+        </script>
+    </body>
+</html>
