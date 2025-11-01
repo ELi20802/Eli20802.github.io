@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>API Example</title>
         <style>
             * {
                 font-family: 'Times New Roman', Times, serif;
@@ -11,6 +12,14 @@
     <body>
         <h1>My chess.com stats</h1>
         <div id="stats"></div>
+        <p>
+            The API I selected is the Published-Data API for chess.com.
+            I picked it because I like to play chess. I analyzed my own stats for the assignment.<br>
+            I found it in the comments of this website: https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/  <br>
+            I had to provide info about which time control (daily, rapid, bullet, blitz) to retreive rating on and whether I wanted to retreive the current or best rating. <br>
+            This API could be useful for if you are playing a chess tournament and need to quickly look up info on your opponent(s). 
+
+        </p>
         
         <script>
             fetch("https://api.chess.com/pub/player/flourc/stats")
